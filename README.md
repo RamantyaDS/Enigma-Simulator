@@ -25,6 +25,8 @@ Simulator 3D mesin Enigma I (3 rotor) yang berjalan di browser. Mesinnya bisa di
 
 Klik rotor untuk memutarnya (Shift+klik untuk mundur). Mesin dibuka dengan kunci contoh dari Wikipedia (10 kabel plugboard).
 
+Mau belajar dekripsi? Coba 10 latihan bertahap beserta kunci jawabannya di [LATIHAN.md](LATIHAN.md).
+
 ## Pengembangan
 
 ```bash
