@@ -6,6 +6,8 @@ import { useStore } from '../store';
 import { Modals } from './Modals';
 import { Panel } from './Panel';
 import { Tape } from './Tape';
+import { Tour } from './Tour';
+import { startTour } from '../tour';
 
 function useKeyboard() {
   useEffect(() => {
@@ -42,22 +44,34 @@ export function App() {
   useKeyboard();
   useShareLink();
   const [help, setHelp] = useState(true);
+  const touring = useStore((s) => s.tour !== null);
   return (
     <>
       <Experience />
       <header className="brand">
         <h1>Enigma I</h1>
         <p>Simulator 3D · 3 rotor</p>
+        {!touring && (
+          <button className="tour-start" onClick={startTour}>
+            ▶ Cara kerja Enigma
+          </button>
+        )}
       </header>
-      {help && (
+      {help && !touring && (
         <div className="help" role="note">
           <p>Ketik di keyboard atau klik tombol mesin. Klik rotor untuk memutar (Shift+klik untuk mundur).</p>
           <p>Drag untuk memutar kamera, scroll atau pinch untuk zoom.</p>
           <button onClick={() => setHelp(false)}>Mengerti</button>
         </div>
       )}
-      <Panel />
-      <Tape />
+      {touring ? (
+        <Tour />
+      ) : (
+        <>
+          <Panel />
+          <Tape />
+        </>
+      )}
       <Modals />
     </>
   );

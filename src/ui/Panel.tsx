@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ALPHABET, parsePlugboard, REFLECTORS, ReflectorName, RotorName, ROTORS, toLetters, Triple } from '../engine/enigma';
 import { goTo, Preset } from '../scene/camera';
 import { MISSION, useStore } from '../store';
+import { startTour } from '../tour';
 
 const SLOTS = ['Kiri', 'Tengah', 'Kanan'];
 const ROTOR_NAMES = Object.keys(ROTORS) as RotorName[];
@@ -146,6 +147,7 @@ export function Panel() {
         <section>
           <h2>Belajar</h2>
           <div className="row">
+            <button onClick={startTour}>Cara kerja Enigma</button>
             <button onClick={() => s.setModal('latihan')}>Latihan</button>
             <button onClick={() => s.setModal('turing')}>Cara Turing memecahkan</button>
             <button onClick={() => s.setModal('kunci')}>Lembar kunci bulanan</button>

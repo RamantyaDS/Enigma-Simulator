@@ -9,6 +9,7 @@ import { Case, Desk, Lid } from './Machine';
 import { Plugboard } from './Plugboard';
 import { Rotors } from './Rotors';
 import { SignalPath } from './SignalPath';
+import { TourHighlight } from './TourHighlight';
 
 function Intro() {
   useEffect(() => {
@@ -60,6 +61,7 @@ export function Experience() {
         <Rotors />
         <Plugboard />
         <SignalPath />
+        <TourHighlight />
       </group>
       <Desk />
       <ContactShadows position={[0, 0.002, 0]} scale={10} blur={2.2} opacity={0.6} far={2} />

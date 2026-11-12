@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { ALPHABET } from '../engine/enigma';
 import { EXERCISES, markDone, startExercise } from '../exercises';
 import { shareLink } from '../share';
-import { playMorse, stopMorse } from '../sound';
+import { MORSE, playMorse, stopMorse } from '../sound';
 import { useStore } from '../store';
 
 const group5 = (t: string) => t.replace(/(.{5})/g, '$1 ').trim();
@@ -77,11 +77,19 @@ export function Tape() {
   const clear = useStore((s) => s.clearTape);
   const [copied, setCopied] = useState('');
   const [playing, setPlaying] = useState(false);
+  const [active, setActive] = useState(-1);
   useEffect(() => stopMorse, []);
   const morse = () => {
     if (playing) return stopMorse();
     setPlaying(true);
-    playMorse(group5(output), () => setPlaying(false));
+    playMorse(
+      group5(output),
+      () => {
+        setPlaying(false);
+        setActive(-1);
+      },
+      setActive,
+    );
   };
   const copy = async (what: 'output' | 'link') => {
     const s = useStore.getState();
@@ -101,6 +109,21 @@ export function Tape() {
         <div>
           <span className="tag">Output</span>
           <p className="out">{group5(output) || '—'}</p>
+          {output && (
+            <p className="morse" aria-label="Output dalam kode Morse">
+              {[...group5(output)].map((ch, i) =>
+                ch === ' ' ? (
+                  <span key={i} className="gap">
+                    /
+                  </span>
+                ) : (
+                  <span key={i} className={i === active ? 'on' : ''} title={ch}>
+                    {MORSE[ch.charCodeAt(0) - 65].replace(/\./g, '·').replace(/-/g, '−')}
+                  </span>
+                ),
+              )}
+            </p>
+          )}
         </div>
         <div className="tape-actions">
           <button onClick={() => copy('output')} disabled={!output}>

@@ -26,11 +26,14 @@ export function click(kind: keyof typeof SOUNDS) {
   src.start();
 }
 
-const MORSE = '.- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..'.split(' ');
+export const MORSE = '.- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..'.split(' ');
 let stopCurrent: (() => void) | null = null;
 
-/** Plays text as Morse code, like a radio operator sending it. Spaces become word gaps. Calls onEnd when done or stopped. */
-export function playMorse(text: string, onEnd: () => void) {
+/**
+ * Plays text as Morse code, like a radio operator sending it. Spaces become word gaps.
+ * Calls onLetter(i) as character i starts sounding, and onEnd when done or stopped.
+ */
+export function playMorse(text: string, onEnd: () => void, onLetter?: (i: number) => void) {
   stopCurrent?.();
   ctx ??= new AudioContext();
   const unit = 0.07; // ~17 words per minute
@@ -39,13 +42,16 @@ export function playMorse(text: string, onEnd: () => void) {
   const gain = ctx.createGain();
   gain.gain.value = 0;
   osc.connect(gain).connect(ctx.destination);
-  let t = ctx.currentTime + 0.05;
-  for (const ch of text) {
+  const t0 = ctx.currentTime;
+  let t = t0 + 0.05;
+  const timers: number[] = [];
+  [...text].forEach((ch, i) => {
     const code = MORSE[ch.charCodeAt(0) - 65];
     if (!code) {
       t += unit * 4; // letter gap (3) + this = word gap (7)
-      continue;
+      return;
     }
+    if (onLetter) timers.push(window.setTimeout(() => onLetter(i), (t - t0) * 1000));
     for (const sym of code) {
       const len = sym === '.' ? unit : unit * 3;
       gain.gain.setValueAtTime(0, t);
@@ -55,8 +61,9 @@ export function playMorse(text: string, onEnd: () => void) {
       t += len + unit;
     }
     t += unit * 2;
-  }
+  });
   const finish = () => {
+    timers.forEach(clearTimeout);
     stopCurrent = null;
     onEnd();
   };

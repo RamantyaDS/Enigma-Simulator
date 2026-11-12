@@ -37,6 +37,8 @@ interface State {
   sound: boolean;
   coverOpen: boolean;
   modal: Modal;
+  /** Index of the open chapter of the guided tour, or null when the tour is closed. */
+  tour: number | null;
   pressKey: (key: number) => void;
   releaseKey: () => void;
   setSettings: (patch: Partial<Settings>) => void;
@@ -49,6 +51,7 @@ interface State {
   toggle: (name: 'xray' | 'slow' | 'sound' | 'coverOpen') => void;
   closeInbox: () => void;
   setModal: (modal: Modal) => void;
+  setTour: (tour: number | null) => void;
 }
 
 const mod = (n: number) => ((n % 26) + 26) % 26;
@@ -71,6 +74,7 @@ export const useStore = create<State>((set, get) => {
     sound: true,
     coverOpen: false,
     modal: null,
+    tour: null,
 
     pressKey: (key) => {
       const s = get();
@@ -141,5 +145,6 @@ export const useStore = create<State>((set, get) => {
     toggle: (name) => set({ [name]: !get()[name] } as Partial<State>),
     closeInbox: () => set({ inbox: null }),
     setModal: (modal) => set({ modal }),
+    setTour: (tour) => set({ tour }),
   };
 });

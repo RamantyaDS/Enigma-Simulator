@@ -37,7 +37,7 @@ select option { background: #1c1712; }
 .brand p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
 
 .help {
-  position: fixed; top: 84px; left: 20px; max-width: 320px;
+  position: fixed; top: 136px; left: 20px; max-width: 320px;
   background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
   padding: 12px 14px; font-size: 13px; line-height: 1.5;
 }
@@ -101,7 +101,7 @@ select option { background: #1c1712; }
 
 @media (max-width: 760px) {
   .brand h1 { font-size: 22px; }
-  .help { top: 70px; left: 16px; right: 16px; max-width: none; }
+  .help { top: 112px; left: 16px; right: 16px; max-width: none; }
   .panel { left: 16px; right: 16px; width: auto; top: 60px; bottom: auto; max-height: 60vh; }
   .tape { left: 16px; right: 16px; }
   .paper { grid-template-columns: 1fr; gap: 8px; }
@@ -159,4 +159,70 @@ select option { background: #1c1712; }
   .print-area { position: absolute; left: 0; top: 0; width: 100%; background: #fff; }
   .modal, .modal-backdrop { position: static; overflow: visible; max-height: none; }
   .no-print { display: none; }
+}
+
+.paper .morse { font-family: 'IBM Plex Sans', monospace; font-size: 14px; letter-spacing: 0.05em; color: #5a4e3c; margin-top: 6px; line-height: 1.7; display: flex; flex-wrap: wrap; gap: 2px 10px; }
+.paper .morse .gap { color: #b0a48c; }
+.paper .morse .on { color: #fff; background: #7a1f12; border-radius: 3px; padding: 0 3px; }
+@media (max-width: 760px) { .paper .morse { font-size: 12px; max-height: 3.6em; } }
+
+.brand .tour-start {
+  pointer-events: auto; margin-top: 10px; color: #1b140c; background: var(--brass); border-color: var(--brass);
+  font-weight: 600; box-shadow: 0 0 0 0 rgba(210, 168, 90, 0.6); animation: pulse 2.4s infinite;
+}
+.brand .tour-start:hover { filter: brightness(1.1); }
+@keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(210, 168, 90, 0); } 100% { box-shadow: 0 0 0 0 rgba(210, 168, 90, 0); } }
+@media (prefers-reduced-motion: reduce) { .brand .tour-start { animation: none; } }
+
+.tour {
+  position: fixed; top: 16px; right: 16px; bottom: 16px; width: 400px; z-index: 4;
+  display: flex; flex-direction: column; gap: 8px;
+  background: rgba(22, 18, 14, 0.94); border: 1px solid var(--brass); border-radius: 12px; padding: 12px 16px;
+  backdrop-filter: blur(8px);
+}
+.tour header { display: flex; justify-content: space-between; align-items: center; }
+.tour .tag { color: var(--brass); }
+.tour header button { min-height: 28px; padding: 2px 8px; }
+.tour h2 { margin: 4px 0 0; font-family: 'Special Elite', monospace; color: var(--brass); font-size: 24px; }
+.tour-body { flex: 1; overflow-y: auto; font-size: 14px; line-height: 1.6; padding-right: 4px; }
+.tour-body p, .tour-body ol { margin: 0 0 10px; }
+.tour-body ol { padding-left: 20px; }
+.tour-body .term { font-size: 13px; color: var(--muted); border-left: 2px solid var(--brass); padding-left: 8px; }
+.tour-body .term strong { color: var(--text); font-style: italic; }
+.tour-body .hint { color: var(--muted); font-size: 13px; }
+.tour-body .mono, .tour-body code { font-family: 'Special Elite', monospace; letter-spacing: 0.08em; }
+.tour-body .amber { color: #ffb84a; font-weight: 600; }
+.tour-body .cyan { color: #5cc8ff; font-weight: 600; }
+.tour-body .pos { font-family: 'Special Elite', monospace; color: var(--brass); font-size: 18px; letter-spacing: 0.1em; }
+.tour-body .try { margin: 0 6px 10px 0; border-color: var(--brass); color: var(--brass); }
+.tour-body .row { margin-bottom: 4px; }
+.tour-body .flow { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.tour-body .flow span { font-size: 12px; padding: 2px 8px; border: 1px solid var(--line); border-radius: 12px; }
+.tour-body .flow span:not(:last-child)::after { content: ' →'; color: var(--brass); }
+.tour-body .trace { font-size: 13px; background: rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 8px 8px 8px 28px; }
+.tour-body .trace .turn { color: #5cc8ff; }
+.tour-body .trace .end { color: #ffb84a; font-weight: 600; }
+.tour-body .wiring { background: var(--paper); color: var(--ink); border-radius: 6px; padding: 6px 10px; margin-bottom: 10px; overflow-x: auto; }
+.tour-body .wiring code { display: block; font-size: 15px; letter-spacing: 0.25em; white-space: nowrap; }
+.tour-body .wiring code + code { color: #7a1f12; }
+.tour-body .pairs { word-spacing: 6px; }
+.tour-body .compare { border-collapse: collapse; margin-bottom: 10px; font-size: 13px; }
+.tour-body .compare td { border: 1px solid var(--line); padding: 3px 8px; }
+.tour-body .calc { width: 100%; }
+.tour-body .calc td:last-child { text-align: right; }
+.tour-body .calc .total td { color: var(--brass); font-weight: 600; }
+.tour-body .steps { font-family: 'Special Elite', monospace; color: var(--brass); font-size: 16px; }
+.tour-body .tech { margin-bottom: 10px; font-size: 13px; }
+.tour-body .tech summary { cursor: pointer; color: var(--brass); }
+.tour-body .tech p { margin: 4px 0; white-space: pre; overflow-x: auto; }
+.tour-body .mini-tape { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; background: var(--paper); color: var(--ink); border-radius: 6px; padding: 8px 10px; margin-bottom: 10px; font-size: 12px; }
+.tour-body .mini-tape code { font-size: 16px; }
+.tour-body .mini-tape .out { color: #7a1f12; }
+.tour footer { display: flex; justify-content: space-between; gap: 8px; }
+.tour footer .primary { color: #1b140c; background: var(--brass); border-color: var(--brass); font-weight: 600; }
+
+@media (max-width: 760px) {
+  .tour { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; height: 48vh; padding: 10px 12px; }
+  .tour h2 { font-size: 20px; }
+  .brand .tour-start { margin-top: 6px; }
 }

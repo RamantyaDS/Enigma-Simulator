@@ -7,6 +7,7 @@ Simulator 3D mesin Enigma I (3 rotor) yang berjalan di browser. Mesinnya bisa di
 ## Fitur
 
 - Mesin 3D interaktif: tombol turun, rotor berputar, lampu menyala
+- Tur "Cara kerja Enigma": 13 bab yang membahas tiap bagian mesin (keyboard, plugboard, rotor, ring setting, reflektor, lampu), cara enkripsi dan dekripsi, sampai kalkulator kekuatan kunci. Kamera menyorot bagian yang dibahas dan setiap bab punya contoh yang bisa dicoba
 - Enkripsi akurat: rotor I–V, reflector UKW-A/B/C, ring setting, posisi awal, plugboard, termasuk anomali double-stepping
 - Mode X-ray: jalur arus dari tombol ke lampu terlihat menyala, ada opsi slow motion
 - Tutup rotor bisa dibuka
@@ -16,7 +17,7 @@ Simulator 3D mesin Enigma I (3 rotor) yang berjalan di browser. Mesinnya bisa di
 - Latihan interaktif: 10 latihan bertahap, jawaban dicek otomatis dan progres tersimpan
 - Demo cara Turing memecahkan Enigma: geser crib di sepanjang ciphertext dan lihat posisi yang mustahil
 - Lembar kunci bulanan: kata sandi yang sama selalu menghasilkan tabel kunci yang sama, bisa dicetak
-- Putar output sebagai kode Morse
+- Kode Morse dari output ditampilkan di bawah teks dan bisa diputar sebagai suara
 - Salin link pesan: link berisi kunci dan ciphertext, penerima tinggal mengetik untuk membacanya
 - Preset kamera: Operator, Rotor, Plugboard, Samping
 - Catatan input/output dalam kelompok 5 huruf
