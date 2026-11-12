@@ -9,7 +9,11 @@ Simulator 3D mesin Enigma I (3 rotor) yang berjalan di browser. Mesinnya bisa di
 - Mesin 3D interaktif: tombol turun, rotor berputar, lampu menyala
 - Enkripsi akurat: rotor I–V, reflector UKW-A/B/C, ring setting, posisi awal, plugboard, termasuk anomali double-stepping
 - Mode X-ray: jalur arus dari tombol ke lampu terlihat menyala, ada opsi slow motion
-- Tutup rotor bisa dibuka, kabel plugboard tampil di panel depan
+- Tutup rotor bisa dibuka
+- Plugboard 3D: klik dua soket untuk mencolok kabel, klik colokan untuk mencabut. Kabel menjuntai ke meja seperti mesin asli
+- Suara klik mekanis untuk tombol, rotor, setting, dan colokan
+- Misi: dekripsi contoh pesan dari buku panduan Enigma (Wikipedia Jerman)
+- Salin link pesan: link berisi kunci dan ciphertext, penerima tinggal mengetik untuk membacanya
 - Preset kamera: Operator, Rotor, Plugboard, Samping
 - Catatan input/output dalam kelompok 5 huruf
 
@@ -19,7 +23,7 @@ Simulator 3D mesin Enigma I (3 rotor) yang berjalan di browser. Mesinnya bisa di
 2. Atur kunci di panel **Setting**: rotor, ring, posisi awal, plugboard.
 3. Untuk mendekripsi: klik **Reset ke posisi awal**, lalu ketik ciphertext dengan setting yang sama.
 
-Klik rotor untuk memutarnya (Shift+klik untuk mundur).
+Klik rotor untuk memutarnya (Shift+klik untuk mundur). Mesin dibuka dengan kunci contoh dari Wikipedia (10 kabel plugboard).
 
 ## Pengembangan
 

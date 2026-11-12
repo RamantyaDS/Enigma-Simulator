@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ALPHABET } from '../engine/enigma';
 import { Experience } from '../scene/Experience';
+import { readLink } from '../share';
 import { useStore } from '../store';
 import { Panel } from './Panel';
 import { Tape } from './Tape';
@@ -26,8 +27,18 @@ function useKeyboard() {
   }, []);
 }
 
+function useShareLink() {
+  useEffect(() => {
+    const link = readLink(location.hash);
+    if (!link) return;
+    useStore.getState().loadKey(link.settings, link.start, { title: 'Pesan masuk dari link', message: link.message });
+    history.replaceState(null, '', location.pathname);
+  }, []);
+}
+
 export function App() {
   useKeyboard();
+  useShareLink();
   const [help, setHelp] = useState(true);
   return (
     <>

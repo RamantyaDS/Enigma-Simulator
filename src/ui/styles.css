@@ -88,6 +88,14 @@ select option { background: #1c1712; }
 .paper p { margin: 2px 0 0; font-family: 'Special Elite', monospace; font-size: 18px; letter-spacing: 0.08em; word-break: break-all; max-height: 4.6em; overflow-y: auto; }
 .paper .out { color: #7a1f12; }
 .tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: #7d705a; }
+.inbox {
+  align-self: flex-start; max-width: 520px; display: flex; gap: 12px; align-items: flex-start;
+  background: var(--panel); border: 1px solid var(--brass); border-radius: 10px; padding: 10px 12px;
+}
+.inbox .tag { color: var(--brass); }
+.inbox .cipher { margin: 4px 0; font-family: 'Special Elite', monospace; font-size: 20px; letter-spacing: 0.1em; }
+.inbox small { color: var(--muted); font-size: 12px; }
+.inbox button { min-height: 28px; padding: 2px 8px; }
 .tape-actions { display: flex; flex-direction: column; gap: 6px; }
 .tape-actions button { color: var(--ink); background: rgba(0, 0, 0, 0.06); border-color: rgba(0, 0, 0, 0.2); }
 

@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ALPHABET, parsePlugboard, REFLECTORS, ReflectorName, RotorName, ROTORS, toLetters, Triple } from '../engine/enigma';
 import { goTo, Preset } from '../scene/camera';
-import { useStore } from '../store';
+import { MISSION, useStore } from '../store';
 
 const SLOTS = ['Kiri', 'Tengah', 'Kanan'];
 const ROTOR_NAMES = Object.keys(ROTORS) as RotorName[];
@@ -13,11 +13,12 @@ function PlugboardInput() {
   const setSettings = useStore((s) => s.setSettings);
   const [text, setText] = useState(current);
   const [error, setError] = useState('');
+  useEffect(() => setText(current), [current]); // follow cables plugged in the 3D view
   const apply = () => {
     try {
       const pairs = parsePlugboard(text) && (text.toUpperCase().match(/[A-Z]{2}/g) ?? []);
       if (pairs.length > 13) throw new Error('Maksimal 13 pasangan');
-      setSettings({ plugboard: pairs.join(' ') });
+      if (pairs.join(' ') !== current) setSettings({ plugboard: pairs.join(' ') });
       setText(pairs.join(' '));
       setError('');
     } catch (e) {
@@ -37,7 +38,7 @@ function PlugboardInput() {
         spellCheck={false}
         autoComplete="off"
       />
-      {error ? <small className="error">{error}</small> : <small>Pasangan huruf dipisah spasi. Tekan Enter untuk menerapkan.</small>}
+      {error ? <small className="error">{error}</small> : <small>Pasangan huruf dipisah spasi, lalu Enter. Bisa juga klik soket di depan mesin: dua soket untuk mencolok, satu colokan untuk mencabut.</small>}
     </div>
   );
 }
@@ -140,6 +141,14 @@ export function Panel() {
           </div>
           <p className="legend">Baris: rotor · ring setting · posisi awal</p>
           <PlugboardInput />
+        </section>
+
+        <section>
+          <h2>Misi</h2>
+          <p className="legend">
+            Ada pesan rahasia dari contoh buku panduan Enigma. Muat kuncinya, lalu ketik ciphertext-nya untuk membaca isi pesan.
+          </p>
+          <button onClick={() => s.loadKey(MISSION.settings, MISSION.start, MISSION.inbox)}>Mulai misi</button>
         </section>
 
         <section>

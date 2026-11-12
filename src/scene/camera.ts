@@ -1,5 +1,6 @@
 import type { CameraControls } from '@react-three/drei';
 import { createRef, type ElementRef } from 'react';
+import type { PerspectiveCamera } from 'three';
 
 export const controls = createRef<ElementRef<typeof CameraControls>>();
 
@@ -13,6 +14,12 @@ export const PRESETS = {
 export type Preset = keyof typeof PRESETS;
 
 export function goTo(name: Preset, smooth = true) {
+  const c = controls.current;
+  if (!c) return;
   const { pos, target } = PRESETS[name];
-  controls.current?.setLookAt(pos[0], pos[1], pos[2], target[0], target[1], target[2], smooth);
+  // Presets are framed for landscape screens; pull back on narrow (portrait) screens so the machine still fits.
+  const aspect = (c.camera as PerspectiveCamera).aspect;
+  const k = Math.max(1, 1.3 / aspect);
+  const p = pos.map((v, i) => target[i] + (v - target[i]) * k);
+  c.setLookAt(p[0], p[1], p[2], target[0], target[1], target[2], smooth);
 }
