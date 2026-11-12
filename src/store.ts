@@ -6,7 +6,13 @@ import { click } from './sound';
 export interface Inbox {
   title: string;
   message: string;
+  /** For exercises: the output the player should get, a hint, and which exercise step this is. */
+  answer?: string;
+  hint?: string;
+  exercise?: { id: number; step: number };
 }
+
+export type Modal = 'latihan' | 'turing' | 'kunci' | null;
 
 // Worked example from de.wikipedia.org/wiki/Enigma_(Maschine) (section "Funkspruch"). Its 10 cables
 // also make a realistic default, since operators normally used 10 plugboard cables.
@@ -30,6 +36,7 @@ interface State {
   slow: boolean;
   sound: boolean;
   coverOpen: boolean;
+  modal: Modal;
   pressKey: (key: number) => void;
   releaseKey: () => void;
   setSettings: (patch: Partial<Settings>) => void;
@@ -41,6 +48,7 @@ interface State {
   clearTape: () => void;
   toggle: (name: 'xray' | 'slow' | 'sound' | 'coverOpen') => void;
   closeInbox: () => void;
+  setModal: (modal: Modal) => void;
 }
 
 const mod = (n: number) => ((n % 26) + 26) % 26;
@@ -62,6 +70,7 @@ export const useStore = create<State>((set, get) => {
     slow: false,
     sound: true,
     coverOpen: false,
+    modal: null,
 
     pressKey: (key) => {
       const s = get();
@@ -131,5 +140,6 @@ export const useStore = create<State>((set, get) => {
     clearTape: () => set({ input: '', output: '' }),
     toggle: (name) => set({ [name]: !get()[name] } as Partial<State>),
     closeInbox: () => set({ inbox: null }),
+    setModal: (modal) => set({ modal }),
   };
 });

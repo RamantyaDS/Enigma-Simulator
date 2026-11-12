@@ -13,6 +13,10 @@ Simulator 3D mesin Enigma I (3 rotor) yang berjalan di browser. Mesinnya bisa di
 - Plugboard 3D: klik dua soket untuk mencolok kabel, klik colokan untuk mencabut. Kabel menjuntai ke meja seperti mesin asli
 - Suara klik mekanis untuk tombol, rotor, setting, dan colokan
 - Misi: dekripsi contoh pesan dari buku panduan Enigma (Wikipedia Jerman)
+- Latihan interaktif: 10 latihan bertahap, jawaban dicek otomatis dan progres tersimpan
+- Demo cara Turing memecahkan Enigma: geser crib di sepanjang ciphertext dan lihat posisi yang mustahil
+- Lembar kunci bulanan: kata sandi yang sama selalu menghasilkan tabel kunci yang sama, bisa dicetak
+- Putar output sebagai kode Morse
 - Salin link pesan: link berisi kunci dan ciphertext, penerima tinggal mengetik untuk membacanya
 - Preset kamera: Operator, Rotor, Plugboard, Samping
 - Catatan input/output dalam kelompok 5 huruf

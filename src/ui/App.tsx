@@ -3,6 +3,7 @@ import { ALPHABET } from '../engine/enigma';
 import { Experience } from '../scene/Experience';
 import { readLink } from '../share';
 import { useStore } from '../store';
+import { Modals } from './Modals';
 import { Panel } from './Panel';
 import { Tape } from './Tape';
 
@@ -11,6 +12,7 @@ function useKeyboard() {
     const down = (e: KeyboardEvent) => {
       if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
       if ((e.target as Element).closest?.('input, select, textarea')) return;
+      if (useStore.getState().modal) return;
       const i = ALPHABET.indexOf(e.key.toUpperCase());
       if (i >= 0 && e.key.length === 1) useStore.getState().pressKey(i);
     };
@@ -56,6 +58,7 @@ export function App() {
       )}
       <Panel />
       <Tape />
+      <Modals />
     </>
   );
 }

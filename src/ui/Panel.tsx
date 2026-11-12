@@ -144,6 +144,15 @@ export function Panel() {
         </section>
 
         <section>
+          <h2>Belajar</h2>
+          <div className="row">
+            <button onClick={() => s.setModal('latihan')}>Latihan</button>
+            <button onClick={() => s.setModal('turing')}>Cara Turing memecahkan</button>
+            <button onClick={() => s.setModal('kunci')}>Lembar kunci bulanan</button>
+          </div>
+        </section>
+
+        <section>
           <h2>Misi</h2>
           <p className="legend">
             Ada pesan rahasia dari contoh buku panduan Enigma. Muat kuncinya, lalu ketik ciphertext-nya untuk membaca isi pesan.

@@ -2,6 +2,8 @@
 
 Ada 10 latihan yang bisa dikerjakan di [simulator](https://ramantyads.github.io/Enigma-Simulator/), dari yang paling gampang sampai yang paling sulit. Kunci jawabannya ada di bagian paling bawah. Semua jawaban dihitung langsung dengan engine simulator ini.
 
+Versi interaktifnya ada di simulator: buka panel **Setting → Belajar → Latihan**. Kuncinya terpasang otomatis dan jawabanmu langsung dicek.
+
 ## Cara memasang kunci
 
 Pengaturan ada di panel **Setting → Kunci harian**:
